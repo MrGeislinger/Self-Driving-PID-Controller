@@ -2,3 +2,6 @@
 build
 tags
 .editorconfig
+
+# Mac OSX
+.DS_Store
