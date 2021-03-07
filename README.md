@@ -4,6 +4,31 @@
 
 > Implements a PID controller in C++ to maneuver the vehicle around the track. The simulator provides the cross track error (CTE) and the velocity (mph) in order to compute the appropriate steering angle.
 
+## Results
+
+![S](images/finalize_parameters_example_run.gif)
+> Sped up example of final parameter run (no dangerous manuevers)
+
+### PID Algorithm
+
+A PID controller uses three parameters to adjust steering; **P** ("proportional"), **I** ("integral"), **D** ("differential"). Together, these parameters can be adjusted to better steer the vehicle based on the associated errors measured in real-time.
+
+The **P** parameter causes the vehicle to steer in proportion to the vehicles's distance from the lane center (CTE). If the vehicle is too far in a direction, it will more drastically correct its steering. If the vehicle is only slightly too far in a direction, it will only slightly correct its steering.
+
+The **I** parameter corrects the bias in the CTE (such as steering drift). Without this term, the controller can have a difficult time reaching its ideal position.
+
+The **D** parameter counters the controller to overshoot the desired position due to the **P** parameter. This parameter allows the vehicle to more smoothly the desired position.
+
+### Choosing PID Parameter Coefficients
+
+Coefficients were determined with trial and error methods until the vehicle could reasonably move around the track safely.
+
+The final values were P=`-0.10`, I=`-0.0001`, and D=`-1.50`(with a throttle of `0.3`).
+
+* **P**: Many runs saw a too slight of an overcorrection. This meant the parameter needed to be increased in magnitude.
+* **I**: This parameter didn't needto be very large since it appears there was little bias in the system.
+* **D**: This parameter was a very important one to counteract the **P** parameter. In initial tests, the **D** parameter was accidentally set to `0` and the vechicle would frequently overshoot its desired position (center of the lane). After adjusting and re-adjusting the parameter, the vehicle does a better job in more smoothly correcting the steering.
+
 ## Set Up: Basic Build Instructions
 
 1. Clone this repo.
