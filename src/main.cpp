@@ -69,6 +69,9 @@ int main() {
           pid.UpdateError(cte);
           // Get steering using the full error term
           steer_value = pid.TotalError();
+          // Restrict steering values to allowed values of [-1,1]
+          steer_value = steer_value > 1 ? 1 : steer_value;
+          steer_value = steer_value < -1 ? -1 : steer_value;
           
           // DEBUG
           std::cout << "Steer value breakdown: " << std::endl;

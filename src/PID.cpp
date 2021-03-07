@@ -19,13 +19,12 @@ void PID::Init(double Kp_, double Ki_, double Kd_) {
 }
 
 void PID::UpdateError(double cte) {
+  // Differential error: d(CTE)/dt = (cte-cte_prev)/(time_elapsed)
+  d_error = cte - p_error; // Get prior cte (1st run will be just d_erro=cte)
   // Proportional error
 	p_error = cte;
   // Integral error: Sum of all errors
 	i_error += cte;
-  // Differential error: d(CTE)/dt = (cte-cte_prev)/(time_elapsed)
-  d_error = cte - p_error;
-
 }
 
 double PID::TotalError() {
