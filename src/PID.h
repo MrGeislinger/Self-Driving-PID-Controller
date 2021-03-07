@@ -30,6 +30,11 @@ class PID {
    * @output The total PID error
    */
   double TotalError();
+  
+  /*
+  *  Tunes each parameters
+  */
+  double OptimizeParameters(double cte, double tolerance);
 
  private:
   /**
@@ -45,6 +50,21 @@ class PID {
   double Kp;
   double Ki;
   double Kd;
+
+  /**
+   * Delta error parameters
+   */
+  double delta_p;
+  double delta_i;
+  double delta_d;
+
+  /**
+   * Coordinate ascent hyperparameters to opitimize parameters
+   */
+  double best_error;
+  int NUM_PARAMS;
+  int current_param;
+  bool recheck;
 };
 
 #endif  // PID_H
