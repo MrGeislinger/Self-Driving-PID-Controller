@@ -71,6 +71,10 @@ int main() {
           steer_value = pid.TotalError();
           
           // DEBUG
+          std::cout << "Steer value breakdown: " << std::endl;
+          std::cout << "P: " << - pid.Kp * pid.p_error << std::endl;
+          std::cout << "D: " << - pid.Kd * pid.d_error << std::endl; 
+          std::cout << "I: " << - pid.Ki * pid.i_error << std::endl;
           std::cout << "CTE: " << cte << " Steering Value: " << steer_value 
                     << std::endl;
 
